@@ -52,7 +52,7 @@ const LocationItem = ({ id, name, address, stations, avgWaitTime, active, image,
             <img src={image} alt={name} className="w-16 h-16 rounded-md object-cover" />
             <div className="ml-4">
                 <h2 className="flex text-lg font-semibold">{name} <span className='pl-3'><IconButton Icon={PiInfoThin}/></span> </h2>
-                <p className="flex items-center text-sm text-gray-500 whitespace-nowrap overflow-hidden overflow-ellipsis">
+                <p className="flex items-center text-sm text-gray-500 w-64 truncate">
                     <span className='pr-2'><TbMapPin /></span>{address}
                 </p>
                 <div className="flex mt-2">
