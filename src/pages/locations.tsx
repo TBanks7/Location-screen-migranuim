@@ -7,20 +7,35 @@ import { PiBuildings } from "react-icons/pi";
 import { BsBox2 } from "react-icons/bs";
 import IconButton from '../components/IconButton';
 import Entity from '../components/Entity';
+import { LOCATIONS } from '../constants/constants';
 
 
 const Locations = () => {
-    const [isChecked, setIsChecked] = useState(true)
+  const [isChecked, setIsChecked] = useState(true);
+  const [isSelectAllChecked, setIsSelectAllChecked] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked)
-    }
+  const handleCheckboxChange = () => {
+      setIsChecked(!isChecked);
+  };
 
-    const [isSelectAllChecked, setIsSelectAllChecked] = useState(false);
+  const handleSelectAllChange = () => {
+      const newSelectAllChecked = !isSelectAllChecked;
+      setIsSelectAllChecked(newSelectAllChecked);
+      setSelectedItems(newSelectAllChecked ? LOCATIONS.map(location => location.id) : []);
+  };
 
-    const handleSelectAllChange = () => {
-        setIsSelectAllChecked(!isSelectAllChecked);
-    };
+  const handleItemSelectChange = (id: number) => {
+      let newSelectedItems;
+      if (selectedItems.includes(id)) {
+          newSelectedItems = selectedItems.filter(itemId => itemId !== id);
+      } else {
+          newSelectedItems = [...selectedItems, id];
+      }
+      setSelectedItems(newSelectedItems);
+      setIsSelectAllChecked(newSelectedItems.length === LOCATIONS.length);
+  };
+
 
     return (
         <div className='p-3 w-full'>
@@ -54,7 +69,7 @@ const Locations = () => {
         </div>
         <div className='flex justify-between pb-5'>
           <label htmlFor="">
-            <input type="checkbox" checked={isSelectAllChecked} onChange={handleSelectAllChange} name="" id="" />
+            <input type="checkbox" checked={isSelectAllChecked} onChange={handleSelectAllChange} />
             <span className= "pl-1 text-gray-500">Select All</span>
           </label>
           <div className='flex items-center'>
@@ -90,7 +105,11 @@ const Locations = () => {
           
 
         </div>
-        <LocationList selected={isSelectAllChecked} />
+        <LocationList 
+                    locations={LOCATIONS} 
+                    selectedItems={selectedItems} 
+                    handleItemSelectChange={handleItemSelectChange} 
+                />
       </div>
     </div>
     )

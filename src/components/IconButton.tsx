@@ -1,6 +1,5 @@
 import React, { Children } from 'react'
 import { IconType } from 'react-icons';
-import { TbTrash } from 'react-icons/tb'
 
 type IconButtonProps = {
     Icon: IconType;

@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 
 const root = ReactDOM.createRoot(
@@ -18,6 +19,7 @@ root.render(
         <Sidebar />
         <div className='flex-1 ml-16'>
           <App />
+          <Footer />
         </div>
       </div>
     </Router>
