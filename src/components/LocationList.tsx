@@ -10,6 +10,7 @@ type Location = {
   active: boolean;
   image: string;
   rating: number;
+  addIcon: boolean;
 }
 
 type LocationListProps = {
@@ -34,6 +35,7 @@ const LocationList = ({ locations, selectedItems, handleItemSelectChange }: Loca
                   rating={location.rating}
                   selected={selectedItems.includes(location.id)}
                   handleItemSelectChange={handleItemSelectChange}
+                  showAddIcon={location.addIcon}
               />
           ))}
       </div>

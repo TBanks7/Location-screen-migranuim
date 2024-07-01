@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { FaStar, FaStarHalf } from 'react-icons/fa';
 import { TbChevronRight, TbInfoCircle, TbMapPin, TbSettings, TbTrash } from 'react-icons/tb';
+import { PiInfoThin } from "react-icons/pi";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { BiStopwatch } from "react-icons/bi";
@@ -19,9 +20,10 @@ type LocationItemProps = {
   rating: number;
   selected: boolean;
   handleItemSelectChange: (id: number) => void;
+  showAddIcon?: boolean;
 }
 
-const LocationItem = ({ id, name, address, stations, avgWaitTime, active, image, rating, selected, handleItemSelectChange }: LocationItemProps) => {
+const LocationItem = ({ id, name, address, stations, avgWaitTime, active, image, rating, selected, handleItemSelectChange, showAddIcon }: LocationItemProps) => {
   const [isActive, setIsActive] = useState(active);
 
   const handleActiveChange = () => {
@@ -49,20 +51,22 @@ const LocationItem = ({ id, name, address, stations, avgWaitTime, active, image,
             </div>
             <img src={image} alt={name} className="w-16 h-16 rounded-md object-cover" />
             <div className="ml-4">
-                <h2 className="flex text-lg font-semibold">{name} <span className='pl-3'><IconButton Icon={TbInfoCircle}/></span> </h2>
-                <p className="flex items-center text-sm text-gray-500"><span className='pr-2'><TbMapPin /></span>{address}</p>
+                <h2 className="flex text-lg font-semibold">{name} <span className='pl-3'><IconButton Icon={PiInfoThin}/></span> </h2>
+                <p className="flex items-center text-sm text-gray-500 whitespace-nowrap overflow-hidden overflow-ellipsis">
+                    <span className='pr-2'><TbMapPin /></span>{address}
+                </p>
                 <div className="flex mt-2">
-                {renderStars()}
+                    {renderStars()}
                 </div>
             </div>
         </div>
         
-        <div className='flex gap-5'>
+        <div className='hidden xl:flex xl:justify-end xl:gap-5 xl:w-1/3'>
             <div className='flex items-center gap-2 bg-gray-200 rounded-md px-2 text-sm text-gray-500'><span className='text-black'><HiOutlineBuildingStorefront /></span> Stations <span className='font-bold text-black'>{stations}</span></div>
             <div className='flex items-center gap-2 bg-gray-200 rounded-md px-2 text-sm text-gray-500'><span className='text-black'><BiStopwatch /></span>Avg. Wait Time <span className='font-bold text-black'>{avgWaitTime}</span></div>
             <div className='border-l-2 border-gray-200'></div>
         </div>
-        <div className='flex items-center'>
+        <div className='flex justify-end items-center w-1/3'>
             <p className='text-sm'>Location Active</p>
             <label className='autoSaverSwitch relative inline-flex cursor-pointer select-none items-center px-2'>
                 <input
@@ -87,11 +91,13 @@ const LocationItem = ({ id, name, address, stations, avgWaitTime, active, image,
                     {isActive ? 'Yes' : 'No'}
                 </span>
             </label>
-            <div className='flex gap-3 px-2 items-center'>
+            <div className='flex px-2 items-center'>
+              <div className='flex justify-center w-32 gap-2'>
                 <IconButton Icon={TbSettings} />
-                <IconButton Icon={AiOutlineAppstoreAdd}/>
+                {showAddIcon && <IconButton Icon={AiOutlineAppstoreAdd}/>}
                 <IconButton Icon={TbTrash} />
-                <TbChevronRight />
+              </div>
+              <TbChevronRight />
             </div>
             
         </div>

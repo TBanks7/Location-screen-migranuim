@@ -8,6 +8,7 @@ export const LOCATIONS = [
       active: true,
       image: "https://via.placeholder.com/150",
       rating: 4.5,
+      addIcon: true
     },
     {
       id: 2,
@@ -18,6 +19,7 @@ export const LOCATIONS = [
       active: true,
       image: "https://via.placeholder.com/150",
       rating: 1,
+      addIcon: false
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ export const LOCATIONS = [
       active: true,
       image: "https://via.placeholder.com/150",
       rating: 0,
+      addIcon: false
     },
     {
         id: 4,
@@ -38,6 +41,7 @@ export const LOCATIONS = [
         active: false,
         image: "https://via.placeholder.com/150",
         rating: 0,
+        addIcon: false
       },
   ];
   
